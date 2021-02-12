@@ -1,28 +1,16 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Posts</h1>
-
-
-  <ul id="listWithHandle" class="list-group">
     <% @posts.each do |post| %>
       <%# link_to 'Show', post %>
       <%# link_to 'Edit', edit_post_path(post) %>
       <%# link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
         <li class="list-group-item">
-          <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
           <%= post.content %>
+          <%= link_to "コメント一覧",post_comments_path(post.id) %>
+          <%= link_to "コメントする",new_post_comment_path(post.id) %>
         </li>
     <% end %>
-  </ul>
 <br>
 
 <%= link_to 'New Post', new_post_path %>
-
-<script>
-  var el = document.getElementById('listWithHandle');
-  // List with handle
-  Sortable.create(el, {
-    handle: '.glyphicon-move',
-    animation: 150
-  });
-</script>
