@@ -2,26 +2,26 @@
 
 <h1>Posts</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Content</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<script>
+  // List with handle
+  Sortable.create(listWithHandle, {
+    handle: '.glyphicon-move',
+    animation: 150
+  });
+</script>
 
-  <tbody>
     <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.content %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <%# link_to 'Show', post %>
+      <%# link_to 'Edit', edit_post_path(post) %>
+      <%# link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <div id="listWithHandle" class="list-group">
+        <div class="list-group-item">
+          <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+          <%= post.content %>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
-
 <br>
 
 <%= link_to 'New Post', new_post_path %>
+
