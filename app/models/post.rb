@@ -1,3 +1,3 @@
 class Post < ApplicationRecord
-  has_many :comments,dependent: :destroy,-> { order(position: :asc) }
+  has_many :comments,-> { order(position: :asc) },dependent: :destroy
 end

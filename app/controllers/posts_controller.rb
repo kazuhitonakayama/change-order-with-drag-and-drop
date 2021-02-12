@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
+  skip_before_action :verify_authenticity_token,only: :sort
+  #protect_from_forgery :except => [:sort]
 
   # GET /posts or /posts.json
   def index
@@ -17,6 +19,14 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+  end
+
+  def sort
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments(params[:from].to_i)
+    @comment.insert_at(params[:to].to_i + 1)
+    redirect_to "posts#show"
+    head :ok
   end
 
   # POST /posts or /posts.json

@@ -1,3 +1,4 @@
+<%= hidden_field_tag :post_id, @post.id %>
 【<%= @post.content %>】へのコメント
 <ul id="listWithHandle" class="list-group">
   <% @comments.each do |comment| %>
@@ -13,7 +14,18 @@
   var el = document.getElementById('listWithHandle');
   // List with handle
   Sortable.create(el, {
+    axis: "y",
     handle: '.glyphicon-move',
-    animation: 150
+    animation: 150,
+    onUpdate: function(evt) {
+      return $.ajax({
+        url: '/posts/' + <%= @post.id %> + '/sort',
+        type: 'patch',
+        data: {
+          from: evt.oldIndex,
+          to: evt.newIndex
+        }
+      });
+    }
   });
 </script>
